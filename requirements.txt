@@ -1,4 +1,7 @@
 feedparser==6.0.10
 python-dotenv==1.0.0
 requests==2.31.0
-beautifulsoup4==4.12.2 
+beautifulsoup4==4.12.2
+customtkinter==5.2.1
+packaging==23.2
+psycopg2==2.9.9 
