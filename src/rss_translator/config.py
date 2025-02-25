@@ -8,15 +8,16 @@ load_dotenv()
 
 # 版本信息
 APP_VERSION = "0.1.0"
-MODEL_NAME = "deepseek-chat"
-MODEL_VERSION = "DeepSeek-V3"  # DeepSeek Chat已全面升级为V3版本
+MODEL_NAME = "deepseek-v3"  # 使用腾讯云 DeepSeek-V3 模型
+MODEL_VERSION = "DeepSeek-V3"  # 671B 参数量的 MoE 模型
 
 # API配置
 DEEPSEEK_API_KEY = os.getenv('DEEPSEEK_API_KEY')
 if not DEEPSEEK_API_KEY:
     raise ValueError("请设置DEEPSEEK_API_KEY环境变量")
 
-DEEPSEEK_API_URL = "https://api.deepseek.com/chat/completions"
+# DeepSeek API配置（腾讯云）
+DEEPSEEK_BASE_URL = "https://api.lkeap.cloud.tencent.com/v1"
 
 # RSS配置
 DEFAULT_RSS_URL = os.getenv('RSS_URL', "http://feeds.bbci.co.uk/news/rss.xml")
@@ -34,6 +35,13 @@ DEFAULT_WINDOW_STATE = {
     "fullscreen": False,  # 不使用全屏模式
     "monitor": None  # 显示器信息
 }
+
+# 模型参数配置（DeepSeek-V3默认参数）
+DEFAULT_TEMPERATURE = 0.7  # 默认温度系数 [0:2)
+DEFAULT_TOP_P = 0.6       # 默认采样阈值
+PRESENCE_PENALTY = 0.95   # 默认存在惩罚系数
+MAX_TOKENS = 8000         # 最大输出长度（不含思维链长度）
+MAX_INPUT_LENGTH = 56000  # 最大输入长度（64k上下文长度）
 
 def save_window_state(*, geometry: str, maximized: bool, fullscreen: bool, monitor: dict) -> None:
     """
